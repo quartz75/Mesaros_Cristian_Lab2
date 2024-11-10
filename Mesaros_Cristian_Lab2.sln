@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35327.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mesaros_Cristian_Lab2", "Mesaros_Cristian_Lab2.csproj", "{9E455607-0F54-4B5A-8638-6B392FBAF353}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9E455607-0F54-4B5A-8638-6B392FBAF353}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E455607-0F54-4B5A-8638-6B392FBAF353}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E455607-0F54-4B5A-8638-6B392FBAF353}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E455607-0F54-4B5A-8638-6B392FBAF353}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BB49E228-EA59-4FC0-BD2A-C6EFA16C554F}
+	EndGlobalSection
+EndGlobal
