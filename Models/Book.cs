@@ -17,6 +17,6 @@ namespace Mesaros_Cristian_Lab2.Models
         [DataType(DataType.Date)] 
         public DateTime PublishingDate { get; set; }
         public int? PublisherID { get; set; }
-        public Publisher? Publisher { get; set; } //navigation property
+        public Publisher? Publisher { get; set; }
     }
 }
