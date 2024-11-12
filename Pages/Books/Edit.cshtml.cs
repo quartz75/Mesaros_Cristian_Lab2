@@ -14,52 +14,46 @@ namespace Mesaros_Cristian_Lab2.Pages.Books
     public class EditModel : BookCategoriesPageModel
     {
         private readonly Mesaros_Cristian_Lab2.Data.Mesaros_Cristian_Lab2Context _context;
-
         public EditModel(Mesaros_Cristian_Lab2.Data.Mesaros_Cristian_Lab2Context context)
         {
             _context = context;
         }
-
         [BindProperty]
-        public Book Book { get; set; } = default!;
-
+        public Book Book { get; set; }
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-
-            var book =  await _context.Book
-                .Include(b => b.Publisher)
-                .Include(b => b.BookCategories).ThenInclude(b => b.Category)
-                .AsNoTracking()
-                .FirstOrDefaultAsync(m => m.ID == id);
-
-            if (book == null)
+            
+            Book = await _context.Book
+            .Include(b => b.Publisher)
+            .Include(b => b.BookCategories).ThenInclude(b => b.Category)
+            .AsNoTracking()
+            .FirstOrDefaultAsync(m => m.ID == id);
+            if (Book == null)
             {
                 return NotFound();
             }
-
-            //apelam PopulateAssignedCategoryData pentru o obtine informatiile necesare checkbox
-            //urilor folosind clasa AssignedCategoryData
-
+            
             PopulateAssignedCategoryData(_context, Book);
-
-            ViewData["AuthorID"] = new SelectList(_context.Set<Author>(), "ID", "FullName");
-            ViewData["PublisherID"] = new SelectList(_context.Set<Publisher>(), "ID", "PublisherName");
+            var authorList = _context.Author.Select(x => new
+            {
+                x.ID,
+                FullName = x.LastName + " " + x.FirstName
+            });
+            ViewData["AuthorID"] = new SelectList(authorList, "ID", "FullName");
+            ViewData["PublisherID"] = new SelectList(_context.Publisher, "ID", "PublisherName");
             return Page();
         }
-
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync(int? id, string[] selectedCategories)
         {
             if (id == null)
             {
                 return NotFound();
             }
-
+            
             var bookToUpdate = await _context.Book
             .Include(i => i.Publisher)
             .Include(i => i.BookCategories)
@@ -69,7 +63,7 @@ namespace Mesaros_Cristian_Lab2.Pages.Books
             {
                 return NotFound();
             }
-
+            
             if (await TryUpdateModelAsync<Book>(
             bookToUpdate,
             "Book",
@@ -80,7 +74,7 @@ namespace Mesaros_Cristian_Lab2.Pages.Books
                 await _context.SaveChangesAsync();
                 return RedirectToPage("./Index");
             }
-
+           
             UpdateBookCategories(_context, selectedCategories, bookToUpdate);
             PopulateAssignedCategoryData(_context, bookToUpdate);
             return Page();

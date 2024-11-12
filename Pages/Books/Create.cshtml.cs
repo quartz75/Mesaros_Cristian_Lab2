@@ -25,15 +25,13 @@ namespace Mesaros_Cristian_Lab2.Pages.Books
             ViewData["AuthorID"] = new SelectList(_context.Set<Author>(), "ID", "FullName");
             ViewData["PublisherID"] = new SelectList(_context.Set<Publisher>(), "ID", "PublisherName");
             var book = new Book();
-            Book.BookCategories = new List<BookCategory>();
+            book.BookCategories = new List<BookCategory>();
             PopulateAssignedCategoryData(_context, book);
             return Page();
         }
 
         [BindProperty]
-        public Book Book { get; set; } = default!;
-
-        // For more information, see https://aka.ms/RazorPagesCRUD.
+        public Book Book { get; set; }
         public async Task<IActionResult> OnPostAsync(string[] selectedCategories)
         {
             var newBook = new Book();
@@ -55,4 +53,4 @@ namespace Mesaros_Cristian_Lab2.Pages.Books
             return RedirectToPage("./Index");
         }
     }
-    }
+}

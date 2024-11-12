@@ -51,11 +51,11 @@
                                     @:</tr><tr>
                                     }
                                     @:<td>
-                                       <input type="checkbox"
-                                              name="selectedCategories"
-                                              value="@cat.CategoryID"
-                                              @(Html.Raw(cat.Assigned ? "checked=\"checked\"" : "")) />
-                                       @cat.CategoryID @: @cat.Name
+                                        <input type="checkbox"
+                                               name="selectedCategories"
+                                               value="@cat.CategoryID"
+                                               @(Html.Raw(cat.Assigned ? "checked=\"checked\"" : "")) />
+                                        @cat.CategoryID @: @cat.Name
                                     @:</td>
                                 }
                             @:</tr>
