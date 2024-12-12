@@ -30,14 +30,37 @@ namespace Mesaros_Cristian_Lab2.Pages.Borrowings
                 return NotFound();
             }
 
-            var borrowing =  await _context.Borrowing.FirstOrDefaultAsync(m => m.ID == id);
-            if (borrowing == null)
+            Borrowing = _context.Borrowing
+                .Include(b => b.Book)
+                .Include(b => b.Member)
+                .FirstOrDefault(m => m.ID == id);
+
+            if (Borrowing == null)
             {
                 return NotFound();
             }
-            Borrowing = borrowing;
-           ViewData["BookID"] = new SelectList(_context.Book, "ID", "ID");
-           ViewData["MemberID"] = new SelectList(_context.Member, "ID", "ID");
+
+          
+            var bookList = _context.Book
+                .Include(b => b.Author)
+                .Select(x => new
+                {
+                    x.ID,
+                    BookDetails = x.Title + " - " + x.Author.LastName + " " + x.Author.FirstName
+                });
+
+            ViewData["BookID"] = new SelectList(bookList, "ID", "BookDetails");
+
+        
+            var memberList = _context.Member
+                .Select(x => new
+                {
+                    x.ID,
+                    MemberName = x.FirstName + " " + x.LastName
+                });
+
+            ViewData["MemberID"] = new SelectList(memberList, "ID", "MemberName");
+
             return Page();
         }
 

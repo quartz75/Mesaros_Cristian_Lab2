@@ -29,16 +29,17 @@ namespace Mesaros_Cristian_Lab2.Pages.Borrowings
                 return NotFound();
             }
 
-            var borrowing = await _context.Borrowing.FirstOrDefaultAsync(m => m.ID == id);
+            Borrowing = await _context.Borrowing
+                .Include(b => b.Member)
+                .Include(b => b.Book)
+                .ThenInclude(b => b.Author) 
+                .FirstOrDefaultAsync(m => m.ID == id);
 
-            if (borrowing == null)
+            if (Borrowing == null)
             {
                 return NotFound();
             }
-            else
-            {
-                Borrowing = borrowing;
-            }
+
             return Page();
         }
 
