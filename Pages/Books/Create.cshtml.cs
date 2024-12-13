@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Mesaros_Cristian_Lab2.Data;
 using Mesaros_Cristian_Lab2.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Mesaros_Cristian_Lab2.Pages.Books
 {
+    [Authorize(Roles = "Admin")]
     public class CreateModel : BookCategoriesPageModel
     {
         private readonly Mesaros_Cristian_Lab2.Data.Mesaros_Cristian_Lab2Context _context;
