@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Mesaros_Cristian_Lab2.Data;
 using Mesaros_Cristian_Lab2.Models;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace Mesaros_Cristian_Lab2.Pages.Publishers
 {
+    [Authorize(Roles = "Admin")]
     public class DetailsModel : PageModel
     {
         private readonly Mesaros_Cristian_Lab2.Data.Mesaros_Cristian_Lab2Context _context;

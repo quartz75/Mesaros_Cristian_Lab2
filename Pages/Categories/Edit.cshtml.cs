@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Mesaros_Cristian_Lab2.Data;
 using Mesaros_Cristian_Lab2.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Mesaros_Cristian_Lab2.Pages.Categories
 {
+    [Authorize(Roles = "Admin")]
     public class EditModel : PageModel
     {
         private readonly Mesaros_Cristian_Lab2.Data.Mesaros_Cristian_Lab2Context _context;
